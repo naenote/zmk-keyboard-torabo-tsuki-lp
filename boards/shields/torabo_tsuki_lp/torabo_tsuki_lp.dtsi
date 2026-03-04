@@ -3,8 +3,6 @@
 #include "torabo_tsuki_lp_layouts.dtsi"
 #include <input/processors.dtsi>
 
-#define MOUSE 4
-
 / {
     chosen {
         zmk,physical-layout = &physical_layout_l;
@@ -92,8 +90,7 @@
 
     pointing_listener: pointing_listener {
         compatible = "zmk,input-listener";
-        status = "okay";
-        input-processors = <&zip_temp_layer MOUSE 600>;
+        status = "disabled";
     };
 
     vbatt: vbatt {
