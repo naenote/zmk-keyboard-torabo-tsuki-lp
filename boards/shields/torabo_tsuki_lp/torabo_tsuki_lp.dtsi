@@ -1,6 +1,9 @@
 #include <zephyr/dt-bindings/gpio/nordic-nrf-gpio.h>
 #include <dt-bindings/zmk/matrix_transform.h>
 #include "torabo_tsuki_lp_layouts.dtsi"
+#include <input/processors.dtsi>
+
+#define MOUSE 4
 
 / {
     chosen {
@@ -89,7 +92,8 @@
 
     pointing_listener: pointing_listener {
         compatible = "zmk,input-listener";
-        status = "disabled";
+        status = "okay";
+        input-processors = <&zip_temp_layer MOUSE 600>;
     };
 
     vbatt: vbatt {
