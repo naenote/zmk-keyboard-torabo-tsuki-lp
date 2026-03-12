@@ -5,16 +5,23 @@
 #define MOUSE 4
 #define SCROLL 5
 
-&pointing_listener {
-    input-processors = 
-        <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)>,
-        <&zip_report_scaler &zip_scroll_scaler SCROLL>,
-        <&zip_temp_layer MOUSE 600>;
+/ {
+    zip_report_scaler: zip_report_scaler {
+        compatible = "zmk,input-processor-report-scaler";
+        #input-processor-cells = <2>;
+    };
 };
 
 &zip_scroll_scaler {
     codes = <INPUT_REL_HWHEEL INPUT_REL_WHEEL>;
     track-remainders;
+};
+
+&pointing_listener {
+    input-processors = 
+        <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)>,
+        <&zip_report_scaler &zip_scroll_scaler SCROLL>,
+        <&zip_temp_layer MOUSE 600>;
 };
 
 &size_s_transform {
