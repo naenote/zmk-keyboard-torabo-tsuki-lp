@@ -6,33 +6,39 @@
 #define SCROLL 5
 
 / {
-    zip_scroll_scaler: zip_scroll_scaler {
-        compatible = "zmk,input-processor-scaler";
+    my_report_scaler: my_report_scaler {
+        compatible = "zmk,input-processor-report-scaler";
         #input-processor-cells = <2>;
-        codes = <INPUT_REL_HWHEEL INPUT_REL_WHEEL>;
-        track-remainders;
-        multiplier = <1>;
-        divisor = <2>;
     };
 
-    zip_0_scaler: zip_0_scaler {
+    my_0_scaler: my_0_scaler {
         compatible = "zmk,input-processor-scaler";
         #input-processor-cells = <2>;
         multiplier = <0>;
         divisor = <1>;
     };
-    
+
     my_temp_layer: my_temp_layer {
         compatible = "zmk,input-processor-temp-layer";
         #input-processor-cells = <2>;
+    };
+
+    ib_msc_ls: ib_msc_ls {
+        compatible = "zmk,input-behavior-listener";
+        device = <&pointing_device>;
+        layers = <SCROLL>;
+        evt-type = <INPUT_EV_REL>;
+        x-code = <INPUT_REL_HWHEEL>;
+        y-code = <INPUT_REL_WHEEL>;
+        scale-multiplier = <1>; 
+        scale-divisor = <2>;
     };
 };
 
 &pointing_listener {
     input-processors = 
         <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)>,
-        <&zip_report_scaler &zip_0_scaler SCROLL>,
-        <&zip_report_scaler &zip_scroll_scaler SCROLL>,
+        <&my_report_scaler &my_0_scaler SCROLL>,
         <&my_temp_layer MOUSE 600>;
 };
 
