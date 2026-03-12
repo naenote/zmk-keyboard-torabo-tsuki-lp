@@ -6,14 +6,21 @@
 #define SCROLL 5
 
 / {
-    my_temp_layer: my_temp_layer {
-        compatible = "zmk,input-processor-temp-layer";
+    zero_scaler: zero_scaler {
+        compatible = "zmk,input-processor-scaler";
+        #input-processor-cells = <2>;
+        multiplier = <0>;
+        divisor = <1>;
+    };
+
+    my_layer_gate: my_layer_gate {
+        compatible = "zmk,input-processor-report-scaler";
         #input-processor-cells = <2>;
     };
 
-    my_xy_scaler: my_xy_scaler {
-        compatible = "zmk,input-processor-scaler";
-        #input-processor-cells = <3>;
+    my_temp_layer: my_temp_layer {
+        compatible = "zmk,input-processor-temp-layer";
+        #input-processor-cells = <2>;
     };
 
     ib_msc_ls: ib_msc_ls {
@@ -30,9 +37,8 @@
 
 &pointing_listener {
     input-processors = 
-        /* XY軸の反転 */
-        <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)>,       
-        <&my_xy_scaler 0 1 SCROLL>,
+        <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)>,
+        <&my_layer_gate &zero_scaler SCROLL>,
         <&my_temp_layer MOUSE 600>;
 };
 
