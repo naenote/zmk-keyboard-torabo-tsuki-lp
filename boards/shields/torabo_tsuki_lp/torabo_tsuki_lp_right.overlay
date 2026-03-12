@@ -8,7 +8,7 @@
 &pointing_listener {
     input-processors = 
         <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)>,
-        input-behaviors = <&ib_msc_ls SCROLL>,
+        <&ib_msc_ls SCROLL>,
         <&zip_temp_layer MOUSE 600>;
 };
 
