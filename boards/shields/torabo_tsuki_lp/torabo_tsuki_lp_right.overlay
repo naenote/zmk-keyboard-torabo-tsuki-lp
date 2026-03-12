@@ -6,6 +6,11 @@
 #define SCROLL 5
 
 / {
+    zip_xy_scaler: zip_xy_scaler {
+        compatible = "zmk,input-processor-scaler";
+        #input-processor-cells = <3>;
+    };
+
     ib_msc_ls: ib_msc_ls {
         compatible = "zmk,input-behavior-listener";
         device = <&pointing_device>;
