@@ -5,17 +5,10 @@
 #define MOUSE 4
 #define SCROLL 5
 
-/ {
-    zip_report_scaler: zip_report_scaler {
-        compatible = "zmk,input-processor-report-scaler";
-        #input-processor-cells = <2>;
-    };
-};
-
 &pointing_listener {
     input-processors = 
         <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)>,
-        <&zip_report_scaler &zip_scroll_scaler SCROLL>,
+        input-behaviors = <&ib_msc_ls SCROLL>,
         <&zip_temp_layer MOUSE 600>;
 };
 
