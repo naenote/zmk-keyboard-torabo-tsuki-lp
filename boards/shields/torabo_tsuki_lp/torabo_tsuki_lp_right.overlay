@@ -5,6 +5,19 @@
 #define MOUSE 4
 #define SCROLL 5
 
+/ {
+    ib_msc_ls: ib_msc_ls {
+        compatible = "zmk,input-behavior-listener";
+        device = <&pointing_device>;
+        layers = <SCROLL>;
+        evt-type = <INPUT_EV_REL>;
+        x-code = <INPUT_REL_HWHEEL>;
+        y-code = <INPUT_REL_WHEEL>;
+        scale-multiplier = <1>; 
+        scale-divisor = <2>;
+    };
+};
+
 &pointing_listener {
     input-processors = 
         <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)>,
