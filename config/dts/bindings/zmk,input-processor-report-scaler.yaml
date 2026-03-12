@@ -1,6 +1,0 @@
-description: Input processor report scaler
-compatible: "zmk,input-processor-report-scaler"
-properties:
-  "#input-processor-cells":
-    type: int
-    const: 2
